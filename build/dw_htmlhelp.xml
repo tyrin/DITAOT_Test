@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- (c) Copyright Demandware 2013, 2006 All Rights Reserved. Author: Tyrin Avery-->
+<project name="dw_htmlhelp" default="dw.htmlhelp" basedir=".">
+
+  <target name="dw.htmlhelp" description="build the samples for HTMLHelp" depends="clean.dw.htmlhelp">
+    <ant antfile="${dita.dir}/build.xml">
+      <property name="args.input" location="${dita.dir}${file.separator}source${file.separator}${MAP.file}"/>
+      <property name="output.dir" location="${dita.dir}/target/htmlhelp"/>
+      <property name="transtype" value="htmlhelp"/>
+    </ant>
+  </target>
+  
+  <target name="clean.dw.htmlhelp" description="remove the HTMLHelp output">
+    <delete dir="${dita.dir}/target/htmlhelp"/>
+  </target>
+  
+</project>

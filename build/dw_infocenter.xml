@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- (c) Copyright Demandware 2014 All Rights Reserved. -->
+<project name="dw_infocenter" default="dw.info" basedir=".">
+	<!-- clean.x and copy.x targets are in the dw_clean.xml file and dw_copy.xml file -->
+	<!-- macros -->
+	<!-- testprop checks the value of a property. If the property is set to the specified value it returns true, otherwise false.  -->
+<macrodef name="testprop">
+	<attribute name="prop"/>
+	<attribute name="val"/>
+	<sequential>
+		<condition property="@{val}.set" value="true">
+		  <equals arg1="${@{prop}}" arg2="@{val}"/>
+		</condition>
+		<condition property="@{val}.set" value="false">
+		<not>
+		  <equals arg1="${@{prop}}" arg2="@{val}"/>
+		</not>
+		</condition>
+	<!--	<echo message="@{prop} value of ${project.lang} set to @{val}? ${@{val}.set}  "/>  -->
+	</sequential>
+</macrodef>
+	<!-- setcountry determines whether to set the eclipse property for country.	country used for china at the moment. If the property is set it adds a country folder (such as CN) to the structure-->
+<macrodef name="setcountry">
+	<attribute name="prop"/>
+	<sequential>
+		<!-- sets property required by DITAOT to build the dirs -->
+		<condition property="args.eclipsehelp.country" value="CN">
+		  <equals arg1="${@{prop}}" arg2="zh"/>
+		</condition>
+		<!-- sets property for directory path -->
+		<condition property="nl.dirs" value="zh${file.separator}CN" else="${project.lang}">
+		  <equals arg1="${@{prop}}" arg2="zh"/>
+		</condition>
+		<!-- sets property for default locale for chinese, otherwise just uses the plain lang value -->
+		<condition property="nl.default" value="zh_CN" else="${project.lang}">
+		  <equals arg1="${@{prop}}" arg2="zh"/>
+		</condition>
+	<!--	<echo message="@{prop} value of ${project.lang} set to @{val}? ${@{val}.set}  "/>  -->
+	</sequential>
+</macrodef>
+		
+<!-- build selected targets-->
+<target name="dw.info" description="select language">
+<!-- clean up any old directories in target directory before building anything-->
+	<antcall target="clean.all" />		
+<!-- test to set what language you're building. for each language, creates a lang.set property with a true/false value For example zh.set=true-->
+	<testprop prop="project.lang" val="en"/>
+	<testprop prop="project.lang" val="de"/>
+	<testprop prop="project.lang" val="it"/>
+	<testprop prop="project.lang" val="ja"/>
+	<testprop prop="project.lang" val="fr"/>
+	<testprop prop="project.lang" val="zh"/>
+	
+<!-- build english help-->		
+		<antcall target="dw.info.doc">
+			<param name="info.lang" value="en"/>
+		</antcall>	
+<!-- copy help structure-->
+		<antcall target="copy.help.dir" />
+<!-- copy english into help structure-->
+		<antcall target="dw.lang.copy" >
+			<param name="info.lang" value="en"/>
+		</antcall>
+<!-- will only run targets if the property is set to true. Use en target if run for the default english for the translated infocenters. -->
+		<antcall target="dw.info.en" />	<!-- builds the dev help-->
+		<antcall target="dw.info.nl" /> <!-- builds single target language-specific help-->
+</target>
+	
+<!-- language-specific targets-->
+<!-- dw.info.en -->
+	<target name="dw.info.en" description="build english infocenter" if="${en.set}">
+		<!-- add api doc and war up-->
+		<antcall target="dw.info.finish">
+		</antcall>
+	</target>
+<!-- these targets build a translated version of the infocenter in -->
+<!--dw.info.nl -->
+	<target name="dw.info.nl" description="build translated infocenter" unless="${en.set}">
+	<setcountry prop="project.lang" />
+	<!-- set nl properties to build international content-->
+		<property name="args.eclipsehelp.language" value="${project.lang}" />
+		<!-- build chinese help-->
+		<antcall target="dw.info.doc">
+			<param name="info.lang" value="${project.lang}"/>
+		</antcall>
+		
+
+		<!-- copy chinese help into the right structure	-->
+		<antcall target="dw.nl.copy" >
+			<param name="info.lang" value="${project.lang}"/>
+		</antcall>
+<!--		<antcall target="dw.nl.web" />
+		<antcall target="dw.info.scripts" />
+		<antcall target="dw.info.nl.scripts" />
+		<antcall target="dw.manifest.copy" />
+		<antcall target="dw.info.war" /> -->
+		<antcall target="dw.nl.finish" />
+	</target>
+
+	
+<!-- common targets-->
+
+		<!-- _______________________base doc target_________________________ -->
+	<target name="dw.info.doc" description="build documentation">
+ <!-- specify ditaval file -->
+  <property name="args.filter" value="${dita.dir}${file.separator}ditaval${file.separator}${info.lang}.ditaval" />
+  <echo message="${info.lang}.ditaval"/>
+  <!-- text added to footer html applies to web, tocjs, xhtml, info, and eclipse targets -->
+  <property name="args.ftr" value="${dita.dir}${file.separator}resource${file.separator}${info.lang}${file.separator}dw_footer.xml"/>
+  <!-- text added to HEAD tag of html must be valid xml. div elements are discarded -->
+  <property name="args.hdf" value="${dita.dir}${file.separator}resource${file.separator}${info.lang}${file.separator}HDF.xml"/>
+  <!-- text added to header of html -->
+  <property name="args.hdr" value="${dita.dir}${file.separator}resource${file.separator}${info.lang}${file.separator}dw_headtag.xml"/>
+  			<echo message="map file path is ${dita.dir}${file.separator}source${file.separator}${info.lang}${file.separator}${MAP.file}"/>
+	<!-- defaults for manifest file for infocenter -->
+	<property name="args.eclipsehelp.provider" value="Demandware" />
+	<property name="args.eclipsehelp.version" value="1.0" />
+	<property name="args.eclipse.symbolic.name" value="com.demandware.doc${doc_output}; singleton=true" />
+   <!-- _________main build target for eclipse help)_______________-->
+		<ant antfile="${dita.dir}/build.xml">
+			<property name="args.input" location="${dita.dir}${file.separator}source${file.separator}${info.lang}${file.separator}${MAP.file}"/>
+			<property name="output.dir" location="${dita.output.info.dir}.${info.lang}"/>
+			<property name="transtype" value="eclipsehelp"/>
+			<property name="args.csspath" value="css"/>
+			<property name="args.cssroot" value="${dita.dir}${file.separator}resource"/>
+		</ant>  
+	</target>
+	<target name="dw.info.finish" description="final steps for english-dev infocenter" depends="dw.javadoc, dw.welcome, dw.info.scripts, dw.info.sdk, dw.info.war"/> 
+	<target name="dw.nl.finish" description="final steps for international infocenter" depends="dw.nl.web, dw.welcome, dw.info.scripts, dw.info.nl.scripts, dw.manifest.copy, dw.info.war"/> 
+	
+	<target name="dw.nl.web" description="Edit web.xml to reflect current language as default for the infocenter UI">
+	<!--	<replaceregexp file="${info.plugin}${file.separator}WEB-INF${file.separator}web.xml"
+               match="OldProperty=(.*)"
+               replace="NewProperty=\1"
+               byline="true"
+		/> -->
+		<replace file="${info.plugin}${file.separator}WEB-INF${file.separator}web.xml" token="-nl en" value="-nl ${nl.default}"/>
+	</target>
+	<target name="dw.welcome" if="welcome" description="Edit Welcome page path if non default is specified in properties file">
+		<echo message="Welcome page set to  ${welcome}"/>  
+		<replace file="${info.plugin}${file.separator}WEB-INF${file.separator}eclipse${file.separator}plugins${file.separator}com.demandware.standard.infocenter${file.separator}plugin_customization.ini" 
+		token="help/GettingStarted/Welcome.html" value="${doc_output}/${welcome}"/>
+	</target>
+
+	<target name="dw.info.war" description="War up help">
+		<antcall target="create_test_war">
+			<param name="new_war_root_name" value="${project.war}" />
+		</antcall>
+	</target> 
+<!-- testing targets-->
+<!-- dw.info.test is the english build without developer information-->
+	<target name="dw.info.test" description="build infocenter without api doc">
+		<!-- clean up any old directories in target directory-->
+		<antcall target="clean.all" />	
+		<!-- build english help-->
+		<antcall target="dw.info.doc">
+			<param name="info.lang" value="en"/>
+		</antcall>
+		<!-- copy files into the plugin structure, add api doc and war up-->
+		<antcall target="copy.help.dir" />
+		<antcall target="dw.info.copy" />
+		<antcall target="dw.welcome" />
+		<antcall target="dw.info.war" />
+
+	</target>	
+<!-- dw.trans.test -->
+		<target name="dw.trans.test" description="build english version of translated infocenter">
+		<property name="args.filter" value="${dita.dir}${file.separator}ditaval${file.separator}zh.ditaval" />
+  		<echo message="zh.ditaval"/>
+	<!-- clean up any old directories in target directory-->
+		<antcall target="clean.all" />
+		<!-- build english help-->
+		<antcall target="dw.info.doc">
+			<param name="info.lang" value="en"/>
+		</antcall>
+		<!-- copy files into the plugin structure, add api doc and war up-->
+		<antcall target="copy.help.dir" />
+		<antcall target="dw.info.copy" />
+		<antcall target="dw.info.war" />
+		</target>
+</project>

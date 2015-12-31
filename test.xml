@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- (c) Copyright Demandware 2013 All Rights Reserved. -->
+<project name="dw_test" default="dw.info.test" basedir=".">
+  <property name="dita.dir" location="${basedir}"/>
+
+<!-- build files containing targets -->
+  <property name="args.logdir" value="log"/>
+  
+  <import file="build${file.separator}dw_clean.xml"/> <!-- clean and create directories -->
+  <import file="build${file.separator}dw_copy.xml"/> <!-- copy tasks -->
+  <import file="build${file.separator}dw_eclipsehelp.xml"/>
+  <import file="build${file.separator}dw_htmlhelp.xml"/>
+  <import file="build${file.separator}dw_infocenter.xml"/>
+
+
+  <property name="args.rellinks" value="nofamily"/>
+  <property name="clean.temp" value="false"/>  <!--  default true automatically removes temp files after build set to false to keep temp dir-->
+  <!-- custom build properties -->
+  <property name="dita.ehelp.dir" value="${dita.dir}${file.separator}ehelp" /> <!-- DITA/ehelp -->
+  <property name="info.plugin" value="${dita.dir}${file.separator}target${file.separator}info${file.separator}${doc_output}" /> <!-- DITA/target/info/help -->
+  <!-- plugin.dir example: DITA/target/info/help/WEB-INF/eclipse/plugins/com.demandware.dochelp -->
+  <property name="plugin.dir" value="${info.plugin}${file.separator}WEB-INF${file.separator}eclipse${file.separator}plugins${file.separator}com.demandware.doc${doc_output}" />
+
+  <!-- defaults for DITA output configuration -->
+
+  <property name="dita.output.dir" value="${dita.dir}${file.separator}target" />
+  <!-- dita.output.info.dir example: DITA/target/info/com.demandware.dochelp -->
+  <property name="dita.output.info" value="${dita.output.dir}${file.separator}info" />
+  <property name="dita.output.info.dir" value="${dita.output.dir}${file.separator}info${file.separator}com.demandware.doc${doc_output}" />
+  <property name="dita.output.xhtml.dir" value="${dita.output.dir}${file.separator}xhtml${file.separator}${doc_output}" />
+  <property name="dita.output.eclipse.dir" value="${dita.output.dir}${file.separator}eclipse${file.separator}com.demandware.doc${doc_output}" />
+  <property name="dita.output.javahelp.dir" value="${dita.output.dir}${file.separator}javahelp${file.separator}${doc_output}" />
+  <property name="dita.output.htmlhelp.dir" value="${dita.output.dir}${file.separator}htmlhelp${file.separator}${doc_output}" />
+  <property name="dita.output.pdf.dir" value="${dita.output.dir}${file.separator}pdf${file.separator}${doc_output}" />
+  <property name="dita.output.wordrtf.dir" value="${dita.output.dir}${file.separator}word${file.separator}${doc_output}" />
+  <property name="dita.output.tocjs.dir" value="${dita.output.dir}${file.separator}tocjs${file.separator}${doc_output}" />
+  
+  	<target name="dw.javadoc" description="dummy target">
+       <echo message="dummy target to keep the test simple and make the build happy"/>
+	</target>	
+
+<target name="infotest" depends="dw.info.test"/>
+</project>

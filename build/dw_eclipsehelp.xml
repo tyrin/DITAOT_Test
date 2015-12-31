@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- (c) Copyright Demandware. 2013 All Rights Reserved. Author: Tyrin Avery-->
+<project name="dw_eclipsehelp" default="dw.eclipse" basedir=".">
+
+  <target name="dw.eclipse" description="build the samples for Eclipse" depends="clean.temp, clean.dw.eclipse">
+    <ant antfile="${dita.dir}/build.xml">
+      <property name="args.input" location="${dita.dir}${file.separator}source${file.separator}${MAP.file}"/>
+			<property name="output.dir" location="${dita.output.eclipse.dir}"/>
+			<property name="transtype" value="eclipsehelp"/>
+			<property name="args.csspath" value="css"/>
+			<property name="args.cssroot" value="${dita.dir}${file.separator}resource"/>
+    </ant>
+  </target>
+
+</project> 

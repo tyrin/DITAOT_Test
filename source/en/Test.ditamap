@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE map PUBLIC "-//OASIS//DTD DITA Map//EN"
+"http://docs.oasis-open.org/dita/dtd/map.dtd">
+<map id="ChunkTest" title="Chunk Test">
+  <topicref href="GettingStarted/Welcome.dita"/>
+
+  <topicref href="Test/TableTest.dita"/>
+
+  <topicref chunk="to-content" href="Test/Test.dita">
+    <topicref href="Test/Test2.dita">
+      <topicref href="Test/Test3.dita"/>
+    </topicref>
+  </topicref>
+</map>

@@ -1,0 +1,4 @@
+<div><table width="100%" class="copyright_table"><tr><td align="left"><p class="copyright_footer"> Copyright &#169; 2015 Demandware, Inc. All rights reserved.</p></td>
+<td><a href="#" id="bookmarklink" onclick="showLink();">Show URL</a><div style="display:none" id="bookmarkme"/></td>
+<td align="right"><a href="#" onclick="javascript:window.location='mailto:docfeedback@demandware.com?subject=' + document.title">Submit Feedback</a></td></tr>
+</table></div>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- (c) Copyright Demandware. 2013 All Rights Reserved. -->
+<project name="dw_copy" default="help.dir.exists" basedir=".">
+	<target name="copy.help.dir">
+	<!-- output.dir should be set already, but default to info output dir for testing -->
+	<property name="output.dir" value="${dita.output.dir}${file.separator}info" />  
+		<!-- <echo> copy ehelp/help directory to target/output/help}</echo> -->
+		<copy todir="${output.dir}${file.separator}${doc_output}" overwrite="true">
+			<fileset dir="${dita.dir}${file.separator}ehelp${file.separator}help" />
+		</copy>
+	</target>
+	<target name="dw.manifest.copy" description="Copy manifest for web app">
+		<!-- <echo message="Copy manifest for web app."/>-->
+		<copy file="${dita.dir}${file.separator}ehelp${file.separator}manifest${file.separator}MANIFEST.MF" todir="${plugin.dir}${file.separator}META-INF" overwrite="true"/>
+	</target>
+		<target name="dw.info.copy" description="Copy documentation into help plugins directory">
+	<!--	<echo message="plugins is ${plugin.dir} and output is ${dita.output.info.dir}" level="info"/> -->
+		<copy todir="${plugin.dir}">
+			<fileset dir="${dita.output.info.dir}.en" />
+		</copy>
+	</target>
+		<target name="dw.lang.copy" description="Copy documentation into help plugins language structure directory">
+	<!--	<echo message="plugins is ${plugin.dir} and output is ${dita.output.info.dir}" level="info"/> -->
+		<copy todir="${plugin.dir}">
+			<fileset dir="${dita.output.info.dir}.${info.lang}" />
+		</copy>
+	</target>
+	<target name="dw.nl.copy" description="Copy nl directory for translated content into help plugins directory">
+		<copy todir="${plugin.dir}${file.separator}nl">
+			<fileset dir="${dita.output.info.dir}.${info.lang}${file.separator}nl" />
+		</copy> 
+		<copy todir="${plugin.dir}" overwrite="true">
+			<fileset dir="${dita.output.info.dir}.${info.lang}"/>
+		</copy>
+	</target>
+	<target name="dw.info.css.copy" description="Copy css for OCAPI (deprecated if plugin bug is fixed in DITA-OT">
+	<!-- 	<echo message="Copy css for OCAPI"/> -->
+		<copy todir="${plugin.dir}">
+			<fileset dir="${dita.output.info.dir}" />
+		</copy>
+	</target>
+	<target name="dw.info.scripts" description="integrate javadoc">
+		<!-- <echo message="Copy images, jquery, etc for scripts into plugin"/>	-->
+		<copy todir="${plugin.dir}${file.separator}scripts" overwrite="true">
+			<fileset file="${dita.dir}${file.separator}scripts${file.separator}build${file.separator}${project.lang}${file.separator}*" />
+		</copy>		
+	</target>
+		<target name="dw.info.nl.scripts" description="integrate scripts down levels for nl pages">
+		<!-- <echo message="Copy images, jquery, etc for scripts into nl structure in plugin"/>	-->
+		<copy todir="${plugin.dir}${file.separator}nl${file.separator}${nl.dirs}${file.separator}scripts" overwrite="true">
+			<fileset file="${dita.dir}${file.separator}scripts${file.separator}build${file.separator}${project.lang}${file.separator}*" />
+		</copy>		
+	</target>
+	<target name="dw.info.sdk" description="integrate iosSDK">
+	<!-- 	<echo message="Copy appledoc into help plugins directory"/> -->
+	    <copy todir="${plugin.dir}${file.separator}iossdk" overwrite="true">
+		  <fileset dir="${dita.ehelp.dir}${file.separator}iossdk" />
+	    </copy>
+	<!-- 	<echo message="Integrate appledoc into toc"/> -->
+		<antcall target="adocdir.check" />
+		<antcall target="warn.adocdir" />
+		<antcall target="iossdk" />	
+	</target>
+	<!--Copies finished war file to language specific sub directory in target-->
+		<target name="copy.war" description="copy war files into ${output.dir}${file.separator}${input.lang}${file.separator}${war.name}" if="${run.me}">
+		<!--<echo message="lang is ${input.lang}" />-->
+		<!--<echo message="war name is ${war.name}" />-->
+		<copy tofile="${dita.output.dir}${file.separator}${input.lang}${file.separator}${war.name}.war" overwrite="true">
+			<fileset file="${dita.output.dir}${file.separator}WAR1.war" />
+		</copy>		
+	</target>
+</project>

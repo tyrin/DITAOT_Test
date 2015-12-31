@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN"
+"concept.dtd">
+<concept id="Test" xml:lang="en-us">
+  <title>Topic Title2</title>
+
+  <conbody>
+    <p>The topics in this area are for test purposes only.</p>
+
+    <section><title>Section Heading A2</title><p>This is section heading a
+    </p><p outputclass="subheading1">Subheading1A2</p><p>This is the paragraph
+    for subheading1</p><p outputclass="subheading2">Subheading2A2</p><p>This
+    is the paragraph for subheading2</p></section>
+
+    <section><title>Section Heading B2</title><p>This is section heading
+    b2</p><p outputclass="subheading1">Subheading1B2</p><p>This is the
+    paragraph for subheading1</p><p
+    outputclass="subheading2">Subheading2B2</p><p>This is the paragraph for
+    subheading2</p></section>
+  </conbody>
+</concept>

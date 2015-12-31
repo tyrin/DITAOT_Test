@@ -1,0 +1,4 @@
+<div><table width="100%" class="copyright_table"><tr><td align="left"><p class="copyright_footer"> Copyright © 2015 Demandware, Inc.All Rights Reserved.</p></td>
+<td><a href="#" id="bookmarklink" onclick="showLink();">URL を表示</a><div style="display:none" id="bookmarkme"/></td>
+<td align="right"><a href="#" onclick="javascript:window.location='mailto:docfeedback@demandware.com?subject=' + document.title">フィードバックを送信</a></td></tr>
+</table></div>

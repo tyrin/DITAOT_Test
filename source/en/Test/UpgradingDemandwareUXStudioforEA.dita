@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE task PUBLIC "-//OASIS//DTD DITA Task//EN"
+"http://docs.oasis-open.org/dita/dtd/task.dtd">
+<task id="UpgradingDemandwareUXStudioforEA" xml:lang="en-us">
+  <title>Installing Demandware UX Studio for Early Access</title>
+
+  <!--
+		<prolog><metadata><keywords><indexterm>Installing Demandware UX
+		Studio</indexterm></keywords></metadata></prolog>
+	-->
+
+  <taskbody>
+    <prereq>The Demandware plugin is officially supported for:<ul>
+        <li>Indigo - Eclipse 3.7</li>
+
+        <li>Juno - Eclipse 4.2</li>
+      </ul><p><note type="important">To run these versions of Eclipse you must
+    use JDK 1.7. Demandware Studio requires that you use Eclipse IDE for Java
+    EE Developers. See
+    http://www.eclipse.org/downloads/packages/eclipse-ide-java-ee-developers/junosr1.</note></p></prereq>
+
+    <context><p><uicontrol>Previous Step: </uicontrol><xref
+    href="Registering.dita">Registering with XChange</xref></p><p>Demandware
+    UX Studio is installed as a plugin for Eclipse. You must first install
+    eclipse and then open it and install the Demandware Studio
+    plugin.</p></context>
+
+    <steps>
+      <step>
+        <cmd>Download Eclipse from http://www.eclipse.org/downloads/ and
+        follow the instructions for installation.</cmd>
+      </step>
+
+      <step>
+        <cmd>Double-click <b>eclipse.exe</b> in your extraction location to
+        run Eclipse. For more information on starting Eclipse, consult the
+        Eclipse documentation.</cmd>
+      </step>
+
+      <step>
+        <cmd>In Eclipse, from the main menu, select <uicontrol>Help &gt;
+        Install New Software.</uicontrol></cmd>
+      </step>
+
+      <step>
+        <cmd>Click <uicontrol>Add</uicontrol>. The <uicontrol>Add
+        Repository</uicontrol> dialog appears.</cmd>
+      </step>
+
+      <step>
+        <cmd>In the <uicontrol>Name</uicontrol> field, enter
+        <codeph>Demandware UX Studio</codeph>.</cmd>
+      </step>
+
+      <step>
+        <cmd>In the <uicontrol>Location</uicontrol> field, enter the URL for
+        your version of Eclipse:</cmd>
+
+        <choices>
+          <choice>Indigo - http://updates.demandware.com/uxstudio/3.7</choice>
+
+          <choice>Juno - http://updates.demandware.com/uxstudio/4.2</choice>
+        </choices>
+      </step>
+
+      <step>
+        <cmd>Select Demandware from the list and select <b>Next</b>. At this
+        point Eclipse will compare the UX Studio requirements with what is
+        available to ensure compatibility. After this process is complete, the
+        <b>Install Details</b> dialog appears.</cmd>
+      </step>
+
+      <step>
+        <cmd>Select <b>Next</b> in the <b>Install Details</b> dialog. The
+        <b>Review Licenses</b> dialog appears.</cmd>
+      </step>
+
+      <step>
+        <cmd>Select the <b>license agreement</b> radio button and then select
+        <b>Finish</b>. The <b>Installing Software</b> dialog appears showing
+        the progress of the installation.</cmd>
+      </step>
+
+      <step>
+        <cmd>Select <b>OK</b> in the <b>Security Warning </b>dialog.</cmd>
+      </step>
+
+      <step>
+        <cmd>Select <b>Yes</b> when prompted to restart Eclipse. UX Studio is
+        now installed.</cmd>
+
+      </step>
+    </steps>
+
+    <postreq><p><uicontrol>Next Step:</uicontrol> <xref
+    href="CreatingaWorkspace.dita">Creating a Workspace.</xref></p><p>You may
+    also want to <xref
+    href="ConfiguringautomaticupdatesforStudio.dita#ConfiguringautomaticupdatesforStudio">Configure
+    automatic updates for Studio.</xref></p></postreq>
+  </taskbody>
+</task>

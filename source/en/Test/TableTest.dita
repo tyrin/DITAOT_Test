@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE concept PUBLIC "-//OASIS//DTD DITA Concept//EN"
+"http://docs.oasis-open.org/dita/dtd/concept.dtd">
+<concept id="D6256" otherprops="transno" translate="no" xml:lang="en-us">
+  <title>Table test</title>
+
+  <!-- <prolog><metadata><keywords><indexterm>Page Content</indexterm></keywords></metadata></prolog> -->
+
+  <conbody>
+    <p outputclass="bodytext">This tests how tables are formatted</p>
+
+    <table>
+      <tgroup cols="2">
+        <thead>
+          <row valign="top">
+            <entry align="left">Page Content</entry>
+
+            <entry align="left">Description</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row valign="top">
+            <entry align="left">Test</entry>
+
+            <entry align="left">This table has a colspec, but no col
+            width.</entry>
+          </row>
+
+          <row valign="top">
+            <entry align="left">Parameters</entry>
+
+            <entry align="left">This table is a child of conbody and has no
+            classes applied and no surrounding elements.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <p outputclass="bodytext">This is an identical table to the first</p>
+
+    <table>
+      <tgroup cols="2">
+        <thead>
+          <row valign="top">
+            <entry align="left">ISML Tag</entry>
+
+            <entry align="left">Used to...</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row valign="top">
+            <entry align="left">Test</entry>
+
+            <entry align="left">This table has a colspec, but no col
+            width.</entry>
+          </row>
+
+          <row valign="top">
+            <entry align="left">Parameters</entry>
+
+            <entry align="left">This table is a child of conbody and has no
+            classes applied and no surrounding elements.<i>decorator</i>
+            template.</entry>
+          </row>
+
+          <row valign="top">
+            <entry align="left">Comment</entry>
+
+            <entry align="left">This table only differs from the first in that
+            it is the second child of the conbody element</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <p>This table has both colspec and colwidth</p>
+
+    <table>
+      <tgroup cols="2">
+        <colspec colname="COLSPEC0" colwidth="121*"/>
+
+        <colspec colname="COLSPEC1" colwidth="76*"/>
+
+        <thead>
+          <row valign="top">
+            <entry align="left">Page Content</entry>
+
+            <entry align="left">Description</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row valign="top">
+            <entry align="left">Test</entry>
+
+            <entry align="left">This table has a colspec and col
+            width.</entry>
+          </row>
+
+          <row valign="top">
+            <entry align="left">Parameters</entry>
+
+            <entry align="left">This table is a child of conbody and has no
+            classes applied and no surrounding elements.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </conbody>
+</concept>
