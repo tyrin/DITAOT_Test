@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This file is for individual help files that do not have links to other areas. -->
+<val>
+<prop att="otherprops" val="transyes" action="exclude"></prop>
+<prop att="otherprops" val="transno" action="include"></prop>
+<prop att="otherprops" val="ccscreenshot" action="exclude"></prop>
+<prop att="otherprops" val="htmlonly" action="include"></prop>
+<prop att="otherprops" val="notwiki" action="include"></prop>
+<prop att="otherprops" val="pdfonly" action="exclude"></prop>
+<prop att="otherprops" val="wikionly" action="exclude"></prop>
+<prop att="otherprops" val="screenshot" action="exclude"></prop>
+<prop att="otherprops" val="onlineonly" action="include"></prop>
+<prop att="otherprops" val="xhtmlonly" action="exclude"></prop>
+<prop att="otherprops" val="prerelease" action="exclude"></prop>
+<prop att="product" val="bm" action="include"></prop>
+<prop att="product" val="cc" action="exclude"></prop>
+<revprop action="flag" val="15.8t">
+     <startflag imageref="img/images/New2.gif"></startflag>
+     <endflag><alt-text>What's New in 15.8</alt-text></endflag>
+</revprop>  
+  <revprop action="flag" val="15.8" backcolor="LemonChiffon">
+    <startflag imageref="img/images/New2.gif"><alt-text>What's New</alt-text></startflag>
+</revprop>  
+</val>
