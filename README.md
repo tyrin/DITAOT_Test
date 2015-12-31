@@ -11,3 +11,5 @@ To run the build:
     ```bash test.sh infotest test```
 
 It should take about nine seconds to complete.
+
+Note: run with java version 1.8.0_45
